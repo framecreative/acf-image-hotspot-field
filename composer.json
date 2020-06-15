@@ -1,0 +1,12 @@
+{
+    "name": "framecreative/acf-image-mapping-hotspots",
+    "type": "wordpress-plugin",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Alex James Bishop",
+            "email": "alex@framecreative.com.au"
+        }
+    ],
+    "require": {}
+}
