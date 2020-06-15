@@ -1,7 +1,7 @@
 <?php
 
 /*
-Plugin Name: Advanced Custom Fields: Image Hotspot Field
+Plugin Name: ACF x Frame Creative: Custom Image Hotspot Field
 Plugin URI: https://framecreative.com.au
 Description: Adds a field to capture coordinates relative to specified images
 Version: 2.0
