@@ -1,12 +1,12 @@
 <?php
 
 /*
-Plugin Name: Advanced Custom Fields: Image Hotspots Field
-Plugin URI: PLUGIN_URL
+Plugin Name: Advanced Custom Fields: Image Hotspot Field
+Plugin URI: https://framecreative.com.au
 Description: Adds a field to capture coordinates relative to specified images
-Version: 0.1
-Author: Andrew Rockwell
-Author URI: http://www.rockwellgrowth.com
+Version: 2.0
+Author: Frame Creative / Andrew Rockwell
+Author URI: https://framecreative.com.au
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
