@@ -175,17 +175,18 @@ class acf_field_image_mapping extends acf_field {
 	function render_field( $field ) {
 
 
-            /*
-            *  Review the data of $field.
-            *  This will show what data is available
-            */
-            $source_type = esc_attr( $field['source_type'] );
-            $img_label     = esc_attr( $field['image_field_label'] );
-            $img_function  = esc_attr( $field['image_field_function'] );
+			/* Stock ACF fields, if these aren't set then the world has ended */
             $field_name    = esc_attr( $field['name'] );
-            $field_value   = esc_attr( $field['value'] );
-            $percent_based = array_key_exists( 'percent_based', $field ) && $field['percent_based'] ? 1 : 0;
-            $xy_pair       = explode( ',', $field_value );
+			$field_value   = esc_attr( $field['value'] );
+
+			/* Our custom ACF field settings, use isset to ensure backwards compatibilty as new fields are added */
+            $source_type   = isset( $field['source_type'] ) ? esc_attr( $field['source_type'] ) : '';
+            $img_label     = isset( $field['image_field_label'] ) ? esc_attr( $field['image_field_label'] ) : '' ;
+            $img_function  = isset( $field['image_field_function'] ) ? esc_attr( $field['image_field_function'] ) : '';
+            $percent_based = isset( $field['percent_based'] ) && $field['percent_based'] ? 1 : 0;
+			
+			/* Computed values / other vars */
+			$xy_pair       = explode( ',', $field_value );
             $url = '';
 
             if ( $source_type === 'function' && function_exists( $img_function ) ){
