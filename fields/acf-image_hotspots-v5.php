@@ -118,14 +118,33 @@ class acf_field_image_mapping extends acf_field {
             ]
         ));
 
-		acf_render_field_setting( $field, array(
+		acf_render_field_setting( $field, [
 			'label'			=> __( 'Image Field Label', 'acf-image_mapping' ),
-			'instructions'	=> __( 'Field label of image to link to', 'acf-image_mapping' ),
-			'placeholder'   => __( 'ACF_IMAGE_FIELD_NAME', 'acf-image_mapping' ),
+			'instructions'	=> __( 'Field label of image field to link to', 'acf-image_mapping' ),
+			'placeholder'   => __( 'acf_image_field_name', 'acf-image_mapping' ),
 			'type'			=> 'text',
 			'name'			=> 'image_field_label',
-			'required'      => true
-		));
+			'required'      => true,
+			'conditional_logic' => [
+				[
+					[ 'field' => 'source_type', 'operator' => '==', 'value' => 'field' ],
+				]
+			],
+		] );
+
+		acf_render_field_setting( $field, [
+			'label'			=> __( 'Function Name', 'acf-image_mapping' ),
+			'instructions'	=> __( 'Function name to call (function must return image URL), no ()' , 'acf-image_mapping' ),
+			'placeholder'   => __( 'my_custom_image_function', 'acf-image_mapping' ),
+			'type'			=> 'text',
+			'name'			=> 'image_field_function',
+			'required'      => true,
+			'conditional_logic' => [
+				[
+					[ 'field' => 'source_type', 'operator' => '==', 'value' => 'function' ],
+				]
+			],
+		] );
 
 		acf_render_field_setting( $field, array(
 			'label'			=> __( 'Percentage Based Coordinates', 'acf-image_mapping' ),
@@ -133,15 +152,6 @@ class acf_field_image_mapping extends acf_field {
 			'type'			=> 'true_false',
 			'name'			=> 'percent_based',
 		));
-
-
-
-		// acf_render_field_setting( $field, array(
-		// 	'label'			=> __( 'Don\'t append units', 'acf-image_mapping' ),
-		// 	'instructions'	=> __( 'Check this box if you DO NOT want units included in the value', 'acf-image_mapping' ),
-		// 	'type'			=> 'true_false',
-		// 	'name'			=> 'skip_units',
-		// ));
 
 	}
 
@@ -165,21 +175,22 @@ class acf_field_image_mapping extends acf_field {
 	function render_field( $field ) {
 
 
-		/*
-		*  Review the data of $field.
-		*  This will show what data is available
-		*/
-        $source_type = esc_attr( $field['source_type'] );
-		$img_label     = esc_attr( $field['image_field_label'] );
-		$field_name    = esc_attr( $field['name'] );
-		$field_value   = esc_attr( $field['value'] );
-		$percent_based = array_key_exists( 'percent_based', $field ) && $field['percent_based'] ? 1 : 0;
-		$xy_pair       = explode( ',', $field_value );
-		$url = '';
+            /*
+            *  Review the data of $field.
+            *  This will show what data is available
+            */
+            $source_type = esc_attr( $field['source_type'] );
+            $img_label     = esc_attr( $field['image_field_label'] );
+            $img_function  = esc_attr( $field['image_field_function'] );
+            $field_name    = esc_attr( $field['name'] );
+            $field_value   = esc_attr( $field['value'] );
+            $percent_based = array_key_exists( 'percent_based', $field ) && $field['percent_based'] ? 1 : 0;
+            $xy_pair       = explode( ',', $field_value );
+            $url = '';
 
-		if ( $source_type === 'function' && function_exists( $img_label ) ){
-		    $url = esc_attr( $img_label() );
-        }
+            if ( $source_type === 'function' && function_exists( $img_function ) ){
+                $url = esc_attr( $img_function() );
+            }
 
 		if ( 1 < count( $xy_pair ) ) {
 			$x = $xy_pair[0];
