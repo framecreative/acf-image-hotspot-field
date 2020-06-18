@@ -188,12 +188,11 @@
 
     setLinkedImageFromAttachment = function(){
 
-		  var $container = $field.closest('.media-frame-content');
+		var $image = $field.closest('.media-frame-content').find( 'img.details-image');
 
-		  if ( ! $container.length ) return false;
-
-		  var $image = $container.find( 'img.details-image');
-
+		if ( ! $image.length ) {
+		  $image = $field.closest('.media-sidebar').find('.thumbnail-image img');
+		}
 		  if ( ! $image.length ) return false;
 
 		  $img = $image;
