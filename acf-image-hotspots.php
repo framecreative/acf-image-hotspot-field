@@ -4,7 +4,7 @@
 Plugin Name: ACF x Frame Creative: Custom Image Hotspot Field
 Plugin URI: https://framecreative.com.au
 Description: Adds a field to capture coordinates relative to specified images
-Version: 2.2.0
+Version: 2.2.1
 Author: Frame Creative / Andrew Rockwell
 Author URI: https://framecreative.com.au
 License: GPLv2 or later
@@ -19,6 +19,8 @@ if( ! defined( 'ABSPATH' ) ) exit;
 if( !class_exists('acf_plugin_image_mapping') ) :
 
 class acf_plugin_image_mapping {
+
+	public $settings;
 	
 	/*
 	*  __construct
