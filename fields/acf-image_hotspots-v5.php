@@ -11,6 +11,8 @@ if( !class_exists('acf_field_image_mapping') ) :
 class acf_field_image_mapping extends acf_field {
 
 
+	public $settings;
+
 	/*
 	*  __construct
 	*
@@ -24,7 +26,7 @@ class acf_field_image_mapping extends acf_field {
 	*  @return	n/a
 	*/
 
-	function __construct( $settings ) {
+	function __construct( array $settings ) {
 
 		/*
 		*  name (string) Single word, no spaces. Underscores allowed
